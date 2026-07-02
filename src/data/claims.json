@@ -1,0 +1,172 @@
+[
+  {
+    "id": "C-1001",
+    "memberId": "M-204417",
+    "dateOfService": "2026-02-03",
+    "provider": "Westlake Internal Medicine",
+    "providerSpecialty": "Internal Medicine",
+    "diagnosisCodes": ["I10", "E11.9"],
+    "lines": [
+      { "cptCode": "99214", "description": "Office/outpatient visit, established patient, moderate complexity", "units": 1, "modifiers": [], "chargeAmount": 172.0 }
+    ],
+    "clinicalNote": "Established patient seen for management of hypertension and type 2 diabetes. Medications reviewed and adjusted; labs ordered. Moderate-complexity decision making documented.",
+    "scenario": "Clean office visit",
+    "groundTruth": "PAY"
+  },
+  {
+    "id": "C-1002",
+    "memberId": "M-118093",
+    "dateOfService": "2026-02-05",
+    "provider": "Harbor Point Laboratory",
+    "providerSpecialty": "Pathology / Laboratory",
+    "diagnosisCodes": ["E11.9"],
+    "lines": [
+      { "cptCode": "80053", "description": "Comprehensive metabolic panel", "units": 1, "modifiers": [], "chargeAmount": 14.5 },
+      { "cptCode": "82565", "description": "Creatinine; blood", "units": 1, "modifiers": [], "chargeAmount": 7.25 }
+    ],
+    "clinicalNote": "Routine diabetes monitoring labs. Comprehensive metabolic panel drawn; creatinine billed separately on the same date of service.",
+    "scenario": "Unbundling violation (component of a panel billed separately)",
+    "groundTruth": "DENY"
+  },
+  {
+    "id": "C-1003",
+    "memberId": "M-330512",
+    "dateOfService": "2026-02-06",
+    "provider": "Cedar Valley Imaging",
+    "providerSpecialty": "Radiology",
+    "diagnosisCodes": ["Z00.00"],
+    "lines": [
+      { "cptCode": "70450", "description": "CT head/brain without contrast", "units": 1, "modifiers": [], "chargeAmount": 278.0 }
+    ],
+    "clinicalNote": "CT of the head ordered. Documentation reflects a general adult examination with no neurological symptoms, headache, syncope, or injury recorded.",
+    "scenario": "Medical-necessity mismatch (advanced imaging on a routine exam)",
+    "groundTruth": "FLAG"
+  },
+  {
+    "id": "C-1004",
+    "memberId": "M-771236",
+    "dateOfService": "2026-02-09",
+    "provider": "Lakeshore Cardiology",
+    "providerSpecialty": "Cardiology",
+    "diagnosisCodes": ["I48.91"],
+    "lines": [
+      { "cptCode": "93000", "description": "Electrocardiogram, complete", "units": 4, "modifiers": [], "chargeAmount": 120.0 }
+    ],
+    "clinicalNote": "Atrial fibrillation follow-up. Claim reports four complete electrocardiograms on a single date of service with no repeat modifier or supporting documentation.",
+    "scenario": "Frequency / units exceeded",
+    "groundTruth": "DENY"
+  },
+  {
+    "id": "C-1005",
+    "memberId": "M-559004",
+    "dateOfService": "2026-02-11",
+    "provider": "Riverside Primary Care",
+    "providerSpecialty": "Primary Care",
+    "diagnosisCodes": ["I10"],
+    "lines": [
+      { "cptCode": "99213", "description": "Office/outpatient visit, established patient, low complexity", "units": 1, "modifiers": [], "chargeAmount": 108.0 }
+    ],
+    "clinicalNote": "Established patient, routine hypertension recheck. Stable; continue current regimen.",
+    "scenario": "Original claim (paired with a later duplicate)",
+    "groundTruth": "PAY"
+  },
+  {
+    "id": "C-1006",
+    "memberId": "M-559004",
+    "dateOfService": "2026-02-11",
+    "provider": "Riverside Primary Care",
+    "providerSpecialty": "Primary Care",
+    "diagnosisCodes": ["I10"],
+    "lines": [
+      { "cptCode": "99213", "description": "Office/outpatient visit, established patient, low complexity", "units": 1, "modifiers": [], "chargeAmount": 108.0 }
+    ],
+    "clinicalNote": "Second submission for the same member, same procedure, same date of service as claim C-1005.",
+    "scenario": "Duplicate claim",
+    "groundTruth": "DENY"
+  },
+  {
+    "id": "C-1007",
+    "memberId": "M-640881",
+    "dateOfService": "2026-02-12",
+    "provider": "Summit Orthopedic Surgery",
+    "providerSpecialty": "Orthopedic Surgery",
+    "diagnosisCodes": ["M17.11"],
+    "lines": [
+      { "cptCode": "27447", "description": "Total knee arthroplasty", "units": 1, "modifiers": [], "chargeAmount": 1520.0 }
+    ],
+    "clinicalNote": "Total knee arthroplasty for right-knee primary osteoarthritis. Operative side documented in the note but no laterality modifier submitted on the claim line.",
+    "scenario": "Missing required laterality modifier (correctable)",
+    "groundTruth": "FLAG"
+  },
+  {
+    "id": "C-1008",
+    "memberId": "M-902145",
+    "dateOfService": "2026-02-13",
+    "provider": "Riverside Primary Care",
+    "providerSpecialty": "Primary Care",
+    "diagnosisCodes": ["I10"],
+    "lines": [
+      { "cptCode": "99213", "description": "Office/outpatient visit, established patient, low complexity", "units": 1, "modifiers": ["ZZ"], "chargeAmount": 108.0 }
+    ],
+    "clinicalNote": "Routine follow-up. Claim line carries modifier 'ZZ', which is not a recognized CPT/HCPCS modifier.",
+    "scenario": "Invalid / unrecognized modifier",
+    "groundTruth": "DENY"
+  },
+  {
+    "id": "C-1009",
+    "memberId": "M-415667",
+    "dateOfService": "2026-02-16",
+    "provider": "Summit Orthopedic Surgery",
+    "providerSpecialty": "Orthopedic Surgery",
+    "diagnosisCodes": ["M17.11"],
+    "lines": [
+      { "cptCode": "27447", "description": "Total knee arthroplasty", "units": 1, "modifiers": ["RT"], "chargeAmount": 1520.0 }
+    ],
+    "clinicalNote": "Total knee arthroplasty for right-knee primary osteoarthritis. Right-side laterality modifier (RT) correctly submitted.",
+    "scenario": "Clean surgical claim with correct laterality modifier",
+    "groundTruth": "PAY"
+  },
+  {
+    "id": "C-1010",
+    "memberId": "M-771236",
+    "dateOfService": "2026-02-18",
+    "provider": "Lakeshore Cardiology",
+    "providerSpecialty": "Cardiology",
+    "diagnosisCodes": ["I48.91"],
+    "lines": [
+      { "cptCode": "93000", "description": "Electrocardiogram, complete", "units": 1, "modifiers": [], "chargeAmount": 30.0 },
+      { "cptCode": "93000", "description": "Electrocardiogram, complete (repeat)", "units": 1, "modifiers": ["76"], "chargeAmount": 30.0 }
+    ],
+    "clinicalNote": "Baseline electrocardiogram, then a repeat ECG performed and interpreted by the same attending cardiologist after an acute symptomatic episode the same day. The repeat is billed on a separate line with modifier 76 (repeat procedure by the same physician).",
+    "scenario": "Justified repeat procedure (modifier 76), must NOT be denied",
+    "groundTruth": "PAY"
+  },
+  {
+    "id": "C-1011",
+    "memberId": "M-283910",
+    "dateOfService": "2026-02-20",
+    "provider": "Riverside Primary Care",
+    "providerSpecialty": "Primary Care",
+    "diagnosisCodes": ["I10"],
+    "lines": [
+      { "cptCode": "99215", "description": "Office/outpatient visit, established patient, high complexity", "units": 1, "modifiers": [], "chargeAmount": 224.0 }
+    ],
+    "clinicalNote": "Established patient in for a brief, routine blood-pressure recheck. Hypertension stable on current medication, no new symptoms or complaints, no medication changes. Exam limited to vitals; straightforward, low-complexity encounter. (Synthetic claim for upcoding illustration.)",
+    "scenario": "Upcoding: high-complexity E/M (99215) billed for a stable low-complexity recheck",
+    "groundTruth": "FLAG"
+  },
+  {
+    "id": "C-1012",
+    "memberId": "M-617204",
+    "dateOfService": "2026-02-23",
+    "provider": "Summit Orthopedic Surgery",
+    "providerSpecialty": "Orthopedic Surgery",
+    "diagnosisCodes": ["M25.561"],
+    "lines": [
+      { "cptCode": "20610", "description": "Arthrocentesis/injection, major joint or bursa", "units": 1, "modifiers": [], "chargeAmount": 165.0 }
+    ],
+    "clinicalNote": "Established patient with right-knee osteoarthritis pain. The record for this date contains only the evaluation-and-management narrative: history and a focused knee exam (medial joint-line tenderness, no effusion) and the assessment/plan. CPT 20610 (arthrocentesis/injection, major joint) is billed for this date, but there is no accompanying procedure note substantiating the injection: no injection site or approach, no needle, no aspiration, and no medication name, dose, or lot recorded. The documentation on file is insufficient to support 20610 as billed; the procedure note is needed to adjudicate. (Synthetic claim: the billed procedure lacks the supporting procedure documentation; pend for records rather than an outright overpayment.)",
+    "scenario": "Insufficient documentation: procedure billed without a supporting procedure note",
+    "groundTruth": "FLAG"
+  }
+]

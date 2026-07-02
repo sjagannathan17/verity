@@ -1,0 +1,251 @@
+{
+  "claimId": "C-1010",
+  "verdict": "PAY",
+  "confidence": 0.98,
+  "rationale": "This claim is appropriate for payment. Both ECGs are medically necessary for a patient with atrial fibrillation (I48.91). While CPT 93000 has an MUE limit of 1 per day, the provider correctly used modifier 76 on the second line to indicate a repeat procedure by the same physician. The clinical note clearly documents that a baseline ECG was performed, followed by a repeat ECG after an acute symptomatic episode the same day, with both interpreted by the same attending cardiologist. This is a legitimate clinical scenario where a repeat ECG is warranted. No NCCI bundling issues, no duplicates, modifiers are valid, and documentation supports both procedures.",
+  "citedRules": [
+    "CMS Medically Unlikely Edits (MUE)",
+    "CMS modifier 76 (repeat procedure by same physician)",
+    "CMS LCD electrocardiography medical necessity",
+    "NCCI PTP edits"
+  ],
+  "remediation": "",
+  "ruleResults": [
+    {
+      "ruleId": "ncci_bundling",
+      "ruleName": "Procedure-to-Procedure Edit",
+      "status": "pass",
+      "finding": "No NCCI procedure-to-procedure pair is billed together without an appropriate bypass modifier.",
+      "citation": "NCCI PTP edits"
+    },
+    {
+      "ruleId": "medical_necessity",
+      "ruleName": "Medical Necessity",
+      "status": "pass",
+      "finding": "Diagnosis I48.91 (atrial fibrillation) supports ECG procedures. Clinical note documents baseline ECG and repeat ECG after acute symptomatic episode, which is medically appropriate.",
+      "citation": "CMS LCD, electrocardiography medical necessity"
+    },
+    {
+      "ruleId": "frequency_units",
+      "ruleName": "Frequency / Units Limit",
+      "status": "pass",
+      "finding": "Per-day units are within the MUE maximum, or a documented repeat modifier (76/77) justifies the units.",
+      "citation": "CMS Medically Unlikely Edits (MUE)"
+    },
+    {
+      "ruleId": "modifier_validation",
+      "ruleName": "Modifier Validation",
+      "status": "pass",
+      "finding": "All submitted modifiers are recognized and any required laterality modifier is present.",
+      "citation": "CMS/HCPCS modifier reference"
+    },
+    {
+      "ruleId": "duplicate_claim",
+      "ruleName": "Duplicate Claim",
+      "status": "pass",
+      "finding": "No earlier peer claim matches this member, date of service, and CPT; this is the original, not a duplicate.",
+      "citation": "Cotiviti duplicate-claim edit (same member/CPT/DOS)"
+    },
+    {
+      "ruleId": "documentation_validation",
+      "ruleName": "Documentation Validation",
+      "status": "pass",
+      "finding": "Clinical note adequately documents both the baseline ECG and repeat ECG after acute symptomatic episode, both interpreted by same attending cardiologist. Documentation supports billed procedures with no evidence of upcoding.",
+      "citation": "Clinical documentation review"
+    }
+  ],
+  "audit": [
+    {
+      "kind": "reasoning",
+      "toolCalled": "Reasoning",
+      "ruleId": null,
+      "input": null,
+      "output": null,
+      "citation": null,
+      "reasoning": "I'll adjudicate this claim by calling all six fact-checking tools to gather the necessary information, then reason over the findings.",
+      "step": 1,
+      "timestamp": "2026-07-01T09:46:01.093Z"
+    },
+    {
+      "kind": "tool",
+      "toolCalled": "Procedure-to-Procedure Edit",
+      "ruleId": "ncci_bundling",
+      "input": {},
+      "output": {
+        "ncciPairsPresent": [],
+        "citation": "NCCI PTP edits"
+      },
+      "citation": null,
+      "reasoning": "Retrieved facts for Procedure-to-Procedure Edit.",
+      "step": 2,
+      "timestamp": "2026-07-01T09:46:01.393Z"
+    },
+    {
+      "kind": "tool",
+      "toolCalled": "Medical Necessity",
+      "ruleId": "medical_necessity",
+      "input": {},
+      "output": {
+        "necessityGuidance": [
+          {
+            "cptCode": "93000",
+            "label": "Electrocardiogram, complete",
+            "supportingIcdPrefixes": [
+              "R07",
+              "I48",
+              "I20",
+              "I10"
+            ],
+            "submittedDiagnoses": [
+              "I48.91"
+            ],
+            "structuredPrefixMatch": true,
+            "citation": "CMS LCD, electrocardiography medical necessity (illustrative)"
+          },
+          {
+            "cptCode": "93000",
+            "label": "Electrocardiogram, complete",
+            "supportingIcdPrefixes": [
+              "R07",
+              "I48",
+              "I20",
+              "I10"
+            ],
+            "submittedDiagnoses": [
+              "I48.91"
+            ],
+            "structuredPrefixMatch": true,
+            "citation": "CMS LCD, electrocardiography medical necessity (illustrative)"
+          }
+        ],
+        "note": "structuredPrefixMatch is a coarse reference signal; judge necessity using the clinical note."
+      },
+      "citation": null,
+      "reasoning": "Retrieved facts for Medical Necessity.",
+      "step": 3,
+      "timestamp": "2026-07-01T09:46:01.693Z"
+    },
+    {
+      "kind": "tool",
+      "toolCalled": "Frequency / Units Limit",
+      "ruleId": "frequency_units",
+      "input": {},
+      "output": {
+        "lines": [
+          {
+            "cptCode": "93000",
+            "unitsBilled": 2,
+            "mueMaxPerDay": 1,
+            "repeatModifierPresent": true,
+            "citation": "CMS Medically Unlikely Edits (MUE), 93000"
+          }
+        ],
+        "repeatModifiers": [
+          "76",
+          "77"
+        ]
+      },
+      "citation": null,
+      "reasoning": "Retrieved facts for Frequency / Units Limit.",
+      "step": 4,
+      "timestamp": "2026-07-01T09:46:01.993Z"
+    },
+    {
+      "kind": "tool",
+      "toolCalled": "Modifier Validation",
+      "ruleId": "modifier_validation",
+      "input": {},
+      "output": {
+        "lines": [
+          {
+            "cptCode": "93000",
+            "modifiers": [],
+            "unrecognizedModifiers": [],
+            "lateralityRequiredOneOf": null,
+            "lateralityPresent": null,
+            "note": null,
+            "citation": "CMS/HCPCS modifier reference"
+          },
+          {
+            "cptCode": "93000",
+            "modifiers": [
+              "76"
+            ],
+            "unrecognizedModifiers": [],
+            "lateralityRequiredOneOf": null,
+            "lateralityPresent": null,
+            "note": null,
+            "citation": "CMS/HCPCS modifier reference"
+          }
+        ],
+        "recognizedModifiers": [
+          "25",
+          "26",
+          "50",
+          "51",
+          "59",
+          "76",
+          "77",
+          "91",
+          "LT",
+          "RT",
+          "TC",
+          "XE",
+          "XS",
+          "XP",
+          "XU"
+        ]
+      },
+      "citation": null,
+      "reasoning": "Retrieved facts for Modifier Validation.",
+      "step": 5,
+      "timestamp": "2026-07-01T09:46:02.293Z"
+    },
+    {
+      "kind": "tool",
+      "toolCalled": "Duplicate Claim",
+      "ruleId": "duplicate_claim",
+      "input": {},
+      "output": {
+        "potentialDuplicates": [],
+        "criterion": "same member + date of service + overlapping CPT",
+        "citation": "Cotiviti duplicate-claim edit (same member/CPT/DOS)"
+      },
+      "citation": null,
+      "reasoning": "Retrieved facts for Duplicate Claim.",
+      "step": 6,
+      "timestamp": "2026-07-01T09:46:02.593Z"
+    },
+    {
+      "kind": "tool",
+      "toolCalled": "Documentation Validation",
+      "ruleId": "documentation_validation",
+      "input": {},
+      "output": {
+        "billedCodes": [
+          {
+            "cptCode": "93000",
+            "description": "Electrocardiogram, complete",
+            "units": 1,
+            "modifiers": []
+          },
+          {
+            "cptCode": "93000",
+            "description": "Electrocardiogram, complete (repeat)",
+            "units": 1,
+            "modifiers": [
+              "76"
+            ]
+          }
+        ],
+        "clinicalNoteProvided": true,
+        "note": "Reference only: judge from the clinical note whether it supports the billed code and its complexity/level. Flag upcoding (level billed above what the note supports) or insufficient documentation (billed procedure not documented as performed)."
+      },
+      "citation": null,
+      "reasoning": "Retrieved facts for Documentation Validation.",
+      "step": 7,
+      "timestamp": "2026-07-01T09:46:02.893Z"
+    }
+  ],
+  "mode": "sample"
+}
